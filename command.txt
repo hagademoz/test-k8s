@@ -1,0 +1,19 @@
+
+# ลง kong
+helm repo add kong https://charts.konghq.com
+helm repo update
+helm install kong kong/ingress -n kong --create-namespace
+
+# สร้าง deployment
+kubectl apply -f xxx/deployment.yml
+
+# สร้าง service
+kubectl apply -f xxx/service.yml
+
+# สร้าง gateway class และ gateway
+kubectl apply -f kong/gateway.yml
+
+# เชื่อม plugin กับ service
+kubectl annotate service <service_name> konghq.com/plugins=<plugin_name_1>,<plugin_name_n>
+(optianal) --overwrite เป็นการลงทับ plugin ทั้งหมดของ service นั้น ๆ
+
