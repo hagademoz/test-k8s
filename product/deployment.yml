@@ -19,3 +19,18 @@ spec:
         image: hagademoz/product:latest
         ports:
         - containerPort: 3000
+        env:
+        - name: MONGODB_URI
+          value: "mongodb+srv://cluster0.7c7l4kv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+        - name: MONGODB_USER
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: username
+        - name: MONGODB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: password
+        - name: MONGODB_DATABASE
+          value: "product"

@@ -1,17 +1,38 @@
+# สร้าง deployment
+kubectl apply -f product/deployment.yml
+kubectl apply -f order/deployment.yml
+
+# สร้าง service
+kubectl apply -f product/service.yml
+kubectl apply -f order/service.yml
+
+# สร้าง secret
+kubectl apply -f product/secret.yml
+
+==============================================================================================================
+### Kong
+
+# Gateways are specific to a namespace, which we need to create before we install the API Gateway:
+kubectl create namespace kong
+
+# Install the Gateway API CRDs before installing Kong Ingress Controller.
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.0.0/standard-install.yaml
+
+# install the Kong Custom Resource Definitions (CRDs)
+kubectl apply -k https://github.com/Kong/kubernetes-ingress-controller/config/crd
 
 # ลง kong
 helm repo add kong https://charts.konghq.com
 helm repo update
 helm install kong kong/ingress -n kong --create-namespace
-
-# สร้าง deployment
-kubectl apply -f xxx/deployment.yml
-
-# สร้าง service
-kubectl apply -f xxx/service.yml
+(optianal) -f values.yml
 
 # สร้าง gateway class และ gateway
 kubectl apply -f kong/gateway.yml
+
+# สร้าง route
+kubectl apply -f kong/routes/product-route.yml.yml
+kubectl apply -f kong/routes/order-route.yml.yml
 
 # เชื่อม plugin กับ service
 kubectl annotate service <service_name> konghq.com/plugins=<plugin_name_1>,<plugin_name_n>

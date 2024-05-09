@@ -16,6 +16,6 @@ config:
   content_type:
   - text/plain; charset=utf-8
   - text/html; charset=utf-8
-  - application/json
+  - application/json; charset=utf-8
   cache_ttl: 300
   strategy: memory

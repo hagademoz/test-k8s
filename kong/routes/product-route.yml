@@ -6,7 +6,8 @@ metadata:
     konghq.com/strip-path: 'true'
 spec:
   parentRefs:
-  - name: kong
+  - name: kong-gateway
+    namespace: kong
   rules:
   - matches:
     - path:
