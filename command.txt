@@ -1,3 +1,6 @@
+# สร้าง secret
+kubectl apply -f product/secret.yml
+
 # สร้าง deployment
 kubectl apply -f product/deployment.yml
 kubectl apply -f order/deployment.yml
@@ -5,9 +8,6 @@ kubectl apply -f order/deployment.yml
 # สร้าง service
 kubectl apply -f product/service.yml
 kubectl apply -f order/service.yml
-
-# สร้าง secret
-kubectl apply -f product/secret.yml
 
 ==============================================================================================================
 ### Kong
@@ -31,10 +31,9 @@ helm install kong kong/ingress -n kong --create-namespace
 kubectl apply -f kong/gateway.yml
 
 # สร้าง route
-kubectl apply -f kong/routes/product-route.yml.yml
-kubectl apply -f kong/routes/order-route.yml.yml
+kubectl apply -f kong/routes/product-route.yml
+kubectl apply -f kong/routes/order-route.yml
 
 # เชื่อม plugin กับ service
 kubectl annotate service <service_name> konghq.com/plugins=<plugin_name_1>,<plugin_name_n>
 (optianal) --overwrite เป็นการลงทับ plugin ทั้งหมดของ service นั้น ๆ
-
