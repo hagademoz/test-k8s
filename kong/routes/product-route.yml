@@ -12,7 +12,7 @@ spec:
   - matches:
     - path:
         type: PathPrefix
-        value: /product
+        value: /product-api/v0
     backendRefs:
     - name: product-service
       kind: Service

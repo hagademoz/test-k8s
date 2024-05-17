@@ -4,10 +4,17 @@ kubectl apply -f product/secret.yml
 # สร้าง deployment
 kubectl apply -f product/deployment.yml
 kubectl apply -f order/deployment.yml
+kubectl apply -f supergraph/deployment.yml
+
+# restart deployment
+kubectl rollout restart -f product/deployment.yml
+kubectl rollout restart -f order/deployment.yml
+kubectl rollout restart -f supergraph/deployment.yml
 
 # สร้าง service
 kubectl apply -f product/service.yml
 kubectl apply -f order/service.yml
+kubectl apply -f supergraph/service.yml
 
 ==============================================================================================================
 ### Kong
@@ -25,7 +32,7 @@ kubectl apply -k https://github.com/Kong/kubernetes-ingress-controller/config/cr
 helm repo add kong https://charts.konghq.com
 helm repo update
 helm install kong kong/ingress -n kong --create-namespace
-(optianal) -f values.yml
+(optianal) -f kong/values.yml
 
 # สร้าง gateway class และ gateway
 kubectl apply -f kong/gateway.yml
@@ -33,6 +40,7 @@ kubectl apply -f kong/gateway.yml
 # สร้าง route
 kubectl apply -f kong/routes/product-route.yml
 kubectl apply -f kong/routes/order-route.yml
+kubectl apply -f kong/routes/supergraph-route.yml
 
 # เชื่อม plugin กับ service
 kubectl annotate service <service_name> konghq.com/plugins=<plugin_name_1>,<plugin_name_n>

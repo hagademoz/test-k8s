@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: supergraph-deployment
+  labels:
+    app: supergraph
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: supergraph
+  template:
+    metadata:
+      labels:
+        app: supergraph
+    spec:
+      containers:
+      - name: supergraph
+        image: hagademoz/supergraph:latest
+        ports:
+        - containerPort: 3000

@@ -3,15 +3,16 @@
 #    env:
 #      LOG_LEVEL: trace
 #      dump_config: true
-# gateway:
-#   admin:
-#     http:
-#       enabled: true
-#   proxy:
-#     http:
-#       enabled: true
-#     tls:
-#       enabled: false
+gateway:
+  admin:
+    http:
+      enabled: true
+  proxy:
+    http:
+      enabled: true
+    tls:
+      enabled: false
+  manager:
 #  ingressController:
 #    env:
 #      LOG_LEVEL: trace

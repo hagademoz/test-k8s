@@ -2,6 +2,7 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: GatewayClass
 metadata:
   name: kong-class
+  namespace: kong
   annotations:
     konghq.com/gatewayclass-unmanaged: 'true'
 spec:
